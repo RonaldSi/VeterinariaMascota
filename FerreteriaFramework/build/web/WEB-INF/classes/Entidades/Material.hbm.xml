@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 13-may-2019 12:34:45 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Entidades.Material" table="material" catalog="ferreteriamvc" optimistic-lock="version">
+        <id name="idMaterial" type="int">
+            <column name="idMaterial" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="categoria" class="Entidades.Categoria" fetch="select">
+            <column name="idCategoria" not-null="true" />
+        </many-to-one>
+        <property name="nombre" type="string">
+            <column name="nombre" length="45" not-null="true" />
+        </property>
+        <property name="precio" type="big_decimal">
+            <column name="precio" precision="8" not-null="true" />
+        </property>
+        <property name="stock" type="int">
+            <column name="stock" not-null="true" />
+        </property>
+        <set name="detalleventas" table="detalleventa" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idMaterial" not-null="true" />
+            </key>
+            <one-to-many class="Entidades.Detalleventa" />
+        </set>
+    </class>
+</hibernate-mapping>

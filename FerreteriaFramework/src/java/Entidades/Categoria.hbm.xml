@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 13-may-2019 12:34:45 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Entidades.Categoria" table="categoria" catalog="ferreteriamvc" optimistic-lock="version">
+        <id name="idCategoria" type="int">
+            <column name="idCategoria" />
+            <generator class="assigned" />
+        </id>
+        <property name="descripcion" type="string">
+            <column name="descripcion" length="45" not-null="true" />
+        </property>
+        <property name="estado" type="char">
+            <column name="estado" length="1" not-null="true" />
+        </property>
+        <set name="materials" table="material" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idCategoria" not-null="true" />
+            </key>
+            <one-to-many class="Entidades.Material" />
+        </set>
+    </class>
+</hibernate-mapping>
